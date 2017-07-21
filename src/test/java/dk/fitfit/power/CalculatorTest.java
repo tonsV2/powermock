@@ -8,6 +8,8 @@ import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.times;
 
 // Stolen from...
 // https://blog.codecentric.de/en/2011/11/testing-and-mocking-of-static-methods-in-java/
@@ -30,5 +32,8 @@ public class CalculatorTest {
 	public void shouldCalculateInAStrangeWay() {
 		assertEquals(0, calc.add(1, 1));
 		assertEquals(1, calc.add(2, 2));
+
+		PowerMockito.verifyStatic(times(2));
+		MathUtil.addInteger(anyInt(),anyInt());
 	}
 }
